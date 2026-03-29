@@ -468,7 +468,6 @@ def get_members(chat_id):
         merged[str(uid)] = name
     return merged
 
-
 # ================= LIMIT GC =================
 LIMIT_FILE = "limit_gc.json5"
 
@@ -489,6 +488,23 @@ def load_limit():
 def save_limit(data):
     with open(LIMIT_FILE, "w") as f:
         json.dump(data, f)
+
+# ================= AUTO RESET LIMIT HARIAN =================
+def reset_limit_daily():
+    while True:
+        now = datetime.now(WIB)
+
+        if now.hour == 0 and now.minute < 2:
+            print("🧹 RESET LIMIT HARIAN")
+
+            try:
+                save_limit({})
+            except Exception as e:
+                print("❌ GAGAL RESET:", e)
+
+            time.sleep(60)
+
+        time.sleep(20)
 
 # 🔥 WORKER SWITCH (ON / OFF)
 WORKER_ACTIVE = True
@@ -529,7 +545,6 @@ def start_progress(user_id):
 def auto_delete_messages(chat_id, message_ids):
     print("🧹 AUTO DELETE START")
 
-    # delay sebelum hapus (biar sempet kebaca user)
     time.sleep(120)
 
     for msg_id in message_ids:
@@ -539,14 +554,13 @@ def auto_delete_messages(chat_id, message_ids):
         try:
             bot.delete_message(chat_id, msg_id)
             print("✔ hapus:", msg_id)
-
         except Exception as e:
             print("❌ GAGAL HAPUS:", msg_id, e)
 
-        # delay kecil biar ga kena flood delete
         time.sleep(0.4)
 
     print("✅ AUTO DELETE SELESAI")
+
 
 # ================= WORKER =================
 def tagall_worker():
@@ -566,7 +580,6 @@ def tagall_worker():
             continue
 
         # ================= LIMIT GC =================
-        # ================= LIMIT GC (RESET 00:00 WIB) =================
         limit_data = load_limit()
         today = get_today_wib()
 
@@ -574,7 +587,6 @@ def tagall_worker():
         partner_link = links[0] if links else "-"
         partner_key = normalize_link(partner_link)
 
-        # 🔥 CEK LIMIT BERDASARKAN LINK (SINKRON HANDLER)
         if limit_data.get(partner_key) == today:
             task_queue.task_done()
             continue
@@ -582,7 +594,7 @@ def tagall_worker():
         print("🔥 AMBIL TASK:", user_id)
 
         try:
-            # 🔥 FIX ANTRIAN (JANGAN MASUKIN BALIK KE QUEUE)
+            # 🔥 FIX ANTRIAN
             if user_queue and user_queue[0] != user_id:
                 time.sleep(0.3)
                 task_queue.task_done()
@@ -590,9 +602,6 @@ def tagall_worker():
 
             running_task = True
             print("🚀 PROSES USER:", user_id)
-
-            links = re.findall(r"(https?://t\.me/\S+)", text)
-            partner_link = links[0] if links else "-"
 
             start_msg = (
                 "🚀 𝐓𝐀𝐆𝐀𝐋𝐋 𝐃𝐈𝐌𝐔𝐋𝐀𝐈\n\n"
@@ -603,9 +612,6 @@ def tagall_worker():
 
             bot.send_message(chat_id, start_msg)
             bot.send_message(user_id, start_msg)
-
-        except Exception as e:
-            print("❌ ERROR:", e)
 
             # ================= START =================
             start_progress(user_id)
@@ -722,6 +728,9 @@ def tagall_worker():
 
             task_queue.task_done()
 
+
+# 🔥 JALANKAN AUTO RESET (WAJIB)
+threading.Thread(target=reset_limit_daily, daemon=True).start()
 
 # ================= CEK JOIN =================
 def is_user_joined(user_id):
