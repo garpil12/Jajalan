@@ -1,4 +1,5 @@
 import os
+import os
 import requests
 import time
 import threading
@@ -6,11 +7,21 @@ import asyncio
 import json
 import re
 import random   # 🔥 WAJIB
-import html     # 🔥 biar ga error escape
+import html     # 🔥 WAJIB
 
 from queue import Queue
+from datetime import datetime, timedelta, timezone  # 🔥 TAMBAHIN (buat limit GC)
+
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
-from telegram.ext import Updater, MessageHandler, Filters, CallbackContext, CommandHandler, CallbackQueryHandler
+from telegram.ext import (
+    Updater,
+    MessageHandler,
+    Filters,
+    CallbackContext,
+    CommandHandler,
+    CallbackQueryHandler
+)
+
 from telethon import TelegramClient
 import database9
 
@@ -901,14 +912,18 @@ def restore_cmd(update, context):
     except Exception as e:
         update.message.reply_text(f"❌ restore gagal\n{e}")
 
+# ================= MAIN =================
 def main():
     global bot
+
     updater = Updater(TOKEN, use_context=True)
     bot = updater.bot
 
-    database9.start_system(bot)
+    # 🔥 FIX UTAMA (INI YANG BENER)
+    database9.start_database_system(bot)
 
     dp = updater.dispatcher
+
     dp.add_handler(CommandHandler("restore", restore_cmd))
     dp.add_handler(CommandHandler("start", start_cmd))
     dp.add_handler(CommandHandler("addpartner", add_partner))
@@ -931,18 +946,20 @@ def main():
         )
     )
 
+    # ================= TELETHON =================
     client.start()
     print("✅ Telethon nyala")
 
+    # ================= WORKER =================
     t = threading.Thread(target=tagall_worker)
     t.daemon = True
     t.start()
 
+    # ================= BOT START =================
     updater.start_polling()
     updater.idle()
 
 
+# ================= RUN =================
 if __name__ == "__main__":
     main()
-
-
