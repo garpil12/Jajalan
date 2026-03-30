@@ -572,7 +572,6 @@ def auto_delete_messages(chat_id, message_ids):
 
     print("✅ AUTO DELETE SELESAI")
 
-
 # ================= WORKER =================
 def tagall_worker():
     global running_task
@@ -613,6 +612,14 @@ def tagall_worker():
 
             running_task = True
             print("🚀 PROSES USER:", user_id)
+
+            # ================= PREVIEW =================
+            preview_msg = (
+                "👀 PREVIEW TAGALL\n\n"
+                f"{text}\n\n"
+                f"🔗 partner: {partner_link}"
+            )
+            bot.send_message(user_id, preview_msg)
 
             start_msg = (
                 "🚀 𝐓𝐀𝐆𝐀𝐋𝐋 𝐃𝐈𝐌𝐔𝐋𝐀𝐈\n\n"
@@ -694,7 +701,7 @@ def tagall_worker():
                         else:
                             time.sleep(1)
 
-                    # 🔥 DELAY UTAMA
+                    # 🔥 DELAY UTAMA (ANTI FLOOD)
                     time.sleep(BASE_DELAY + random.uniform(0.7, 1.3))
 
             # ================= SELESAI =================
@@ -744,9 +751,8 @@ def tagall_worker():
             task_queue.task_done()
 
 
-# 🔥 JALANKAN AUTO RESET
-threading.Thread(target=reset_limit_daily, daemon=True).start()
-
+# 🔥 AUTO RESET
+threading.Thread(target=reset_limit_daily, daemon=True).start()                   
 
 # ================= CEK JOIN =================
 def is_user_joined(user_id):
