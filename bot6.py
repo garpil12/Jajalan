@@ -307,7 +307,6 @@ def start_cmd(update: Update, context: CallbackContext):
         "🧡 NIGHT HAVEN 🧡",
         "❤️ NIGHT HAVEN ❤️"
     ]
-    ]
 
     for g in glitch:
         time.sleep(0.12)
@@ -671,6 +670,9 @@ def tagall_worker():
 
                         sent += len(batch)
                         update_progress(user_id, sent, total)
+                        
+                        if sent % 25 == 0:
+                        time.sleep(random.uniform(1.5, 2.5))
 
                     except Exception as e:
                         print("❌      ", e)
@@ -681,8 +683,8 @@ def tagall_worker():
                                 time.sleep(wait + 1)
                             except:
                                 time.sleep(3)
-
-                        elif "Too Many Requests" in str(e):
+                        
+                        elif "Too Many Requests" in str(e): Lo
                             time.sleep(3)
 
                         elif "Timed out" in str(e):
@@ -691,7 +693,7 @@ def tagall_worker():
                         else:
                             time.sleep(1)
 
-                    time.sleep(BASE_DELAY + random.uniform(0.15, 0.35))
+                    time.sleep(BASE_DELAY + random.uniform(0.7, 1.3))
 
             # ================= SELESAI =================
             bot.send_message(
