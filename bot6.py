@@ -23,24 +23,24 @@ from telegram.ext import (
 )
 
 from telethon import TelegramClient
-import database0
+import database7
 
 loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)
 
-TOKEN = "8307438695:AAEU8MPX2BSj7EH5VOjHVhtfqloS7olHObg"
+TOKEN = "8621144366:AAEKUauKyBSBZfY-cvWmOgEYn9ad0ULQy2U"
 API_URL = "http://127.0.0.1:5000/get"
-TARGET_CHATS = [-1002430300514]
-FORCE_GROUP = -1002430300514   # 🔥 WAJIB (buat cek join)
-FORCE_LINK = "https://t.me/officialhyperion"
+TARGET_CHATS = [-1002208118831]
+FORCE_GROUP = -1002208118831   # 🔥 WAJIB (buat cek join)
+FORCE_LINK = "https://t.me/ZonaNight_Haven"
 
 OWNER_IDS = [8209644174, 5674665043]
-PARTNER_FILE = "partner.json0"
-SETTING_FILE = "setting.json0"
+PARTNER_FILE = "partner.json7"
+SETTING_FILE = "setting.json7"
 
 api_id = 33370509
 api_hash = "669af6caebf2aca264b16cf8b40d37b2"
-client = TelegramClient("session_new0", api_id, api_hash)
+client = TelegramClient("session_new7", api_id, api_hash)
 
 task_queue = Queue()
 running_task = False  # 🔥 ANTI DOUBLE TASK
@@ -300,12 +300,12 @@ def start_cmd(update: Update, context: CallbackContext):
 
     # ================= RGB GLITCH =================
     glitch = [
-        "💜 HYPΞRIØN 💜",
-        "💙 HYPERION 💙",
-        "💚 HYPΞRIØN 💚",
-        "💛 HYPERION 💛",
-        "🧡 HYPΞRIØN 🧡",
-        "❤️ HYPERION ❤️"
+        "💜 NIGHT HAVEN 💜",
+        "💙 NIGHT HAVEN 💙",
+        "💚 NIGHT HAVEN 💚",
+        "💛 NIGHT HAVEN 💛",
+        "🧡 NIGHT HAVEN 🧡",
+        "❤️ NIGHT HAVEN ❤️"
     ]
     ]
 
@@ -350,7 +350,7 @@ def start_cmd(update: Update, context: CallbackContext):
 
     # ================= FINAL TEXT (FIX CLEAN) =================
     text = (
-        "𓊆 ✨ 𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎 𝗕𝗢𝗧 𝐇𝐘𝐏𝐄𝐑𝐈𝐎𝐍 ✨ 𓊇 \n\n"
+        "𓊆 ✨ 𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎 𝗕𝗢𝗧 𝐍𝐈𝐆𝐇𝐓 𝐇𝐀𝐕𝐄𝐍 ✨ 𓊇 \n\n"
 
         "╭───────────────╮\n"
         "│ ٬٬ ࣪ ، 𒀭 bot tag all dengan sistem otomatis.\n"
@@ -390,7 +390,7 @@ def start_cmd(update: Update, context: CallbackContext):
         pass
 
     # ================= FOTO SYSTEM =================
-    photo_path = "database0/start.jpg"
+    photo_path = "database7/start.jpg"
 
     if data.get("start_pict"):
         context.bot.send_photo(
@@ -481,7 +481,7 @@ def get_members(chat_id):
     return merged
 
 # ================= LIMIT GC =================
-LIMIT_FILE = "limit_gc.json0"
+LIMIT_FILE = "limit_gc.json7"
 
 from datetime import datetime, timedelta, timezone
 
@@ -619,7 +619,7 @@ def tagall_worker():
                 "🚀 𝐓𝐀𝐆𝐀𝐋𝐋 𝐃𝐈𝐌𝐔𝐋𝐀𝐈\n\n"
                 f"🔗 partner : {partner_link}\n"
                 "⏰   durasi : 5 menit\n"
-                "📍 JIKA BOT EROR SILAHKAN KESINI @tagalhyperBot"
+                "📍 JIKA BOT EROR SILAHKAN KESINI @TAGallnigth_bot"
             )
 
             bot.send_message(chat_id, start_msg)
@@ -662,7 +662,7 @@ def tagall_worker():
                     try:
                         msg = bot.send_message(
                             chat_id,
-                            f" 💕 𝗕𝗢𝗧 𝗧𝗔𝗚𝗔𝗟𝗟 𝗛𝗬𝗣𝗘𝗥𝗜𝗢𝗡 💖\n\n{text}\n\n{mention_text}",
+                            f" 💕 𝗕𝗢𝗧 𝗧𝗔𝗚𝗔𝗟𝗟 NIGHT HAVEN 💖\n\n{text}\n\n{mention_text}",
                             parse_mode="HTML",
                         )
 
@@ -882,8 +882,8 @@ def restore_cmd(update, context):
             files = z.namelist()
 
             # ================= VALIDASI ISI =================
-            valid = any("partner.json" in f for f in files) or \
-                    any("setting.json" in f for f in files)
+            valid = any("partner.json7" in f for f in files) or \
+                    any("setting.json7" in f for f in files)
 
             if not valid:
                 update.message.reply_text("❌ isi zip tidak valid")
@@ -892,12 +892,12 @@ def restore_cmd(update, context):
             # ================= BACKUP LAMA =================
             backup_name = f"backup_before_restore_{int(time.time())}.zip"
             with zipfile.ZipFile(backup_name, 'w') as backup:
-                if os.path.exists("partner.json0"):
-                    backup.write("partner.json0")
-                if os.path.exists("setting.json0"):
-                    backup.write("setting.json0")
-                if os.path.exists("database0"):
-                    for root, dirs, files2 in os.walk("database0"):
+                if os.path.exists("partner.json7"):
+                    backup.write("partner.json7")
+                if os.path.exists("setting.json7"):
+                    backup.write("setting.json7")
+                if os.path.exists("database7"):
+                    for root, dirs, files2 in os.walk("database7"):
                         for f in files2:
                             backup.write(os.path.join(root, f))
 
@@ -921,7 +921,7 @@ def main():
     bot = updater.bot
 
     # 🔥 FIX UTAMA (INI YANG BENER)
-    database0.start_database_system(bot)
+    database7.start_database_system(bot)
 
     dp = updater.dispatcher
 
