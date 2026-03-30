@@ -23,24 +23,24 @@ from telegram.ext import (
 )
 
 from telethon import TelegramClient
-import database8
+import database0
 
 loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)
 
-TOKEN = "8618687689:AAFep2yL5CCUgRbT5WVMJazanJ4A46mYfkk"
+TOKEN = "8307438695:AAEU8MPX2BSj7EH5VOjHVhtfqloS7olHObg"
 API_URL = "http://127.0.0.1:5000/get"
-TARGET_CHATS = [-1003386661267]
-FORCE_GROUP = -1003386661267   # 🔥 WAJIB (buat cek join)
-FORCE_LINK = "https://t.me/officiallgarfieldgrub"
+TARGET_CHATS = [-1002430300514]
+FORCE_GROUP = -1002430300514   # 🔥 WAJIB (buat cek join)
+FORCE_LINK = "https://t.me/officialhyperion"
 
 OWNER_IDS = [8209644174, 5674665043]
-PARTNER_FILE = "partner.json8"
-SETTING_FILE = "setting.json8"
+PARTNER_FILE = "partner.json0"
+SETTING_FILE = "setting.json0"
 
 api_id = 33370509
 api_hash = "669af6caebf2aca264b16cf8b40d37b2"
-client = TelegramClient("session_new4", api_id, api_hash)
+client = TelegramClient("session_new0", api_id, api_hash)
 
 task_queue = Queue()
 running_task = False  # 🔥 ANTI DOUBLE TASK
@@ -300,12 +300,12 @@ def start_cmd(update: Update, context: CallbackContext):
 
     # ================= RGB GLITCH =================
     glitch = [
-        "💜 𝒦𝒜𝒯ℛ𝒪 💜",
-        "💙 𝒦𝒜𝒯ℛ𝒪 💙",
-        "💚 𝐊𝐀𝐓𝐑𝐎 💚",
-        "💛 𝒦𝒜𝒯ℛ𝒪 💛",
-        "🧡 𝐊𝐀𝐓𝐑𝐎 🧡",
-        "❤️ 𝑲𝑨𝑻𝑹𝑶 ❤️"
+        "💜 HYPΞRIØN 💜",
+        "💙 HYPERION 💙",
+        "💚 HYPΞRIØN 💚",
+        "💛 HYPERION 💛",
+        "🧡 HYPΞRIØN 🧡",
+        "❤️ HYPERION ❤️"
     ]
     ]
 
@@ -390,7 +390,7 @@ def start_cmd(update: Update, context: CallbackContext):
         pass
 
     # ================= FOTO SYSTEM =================
-    photo_path = "database8/start.jpg"
+    photo_path = "database0/start.jpg"
 
     if data.get("start_pict"):
         context.bot.send_photo(
@@ -481,7 +481,7 @@ def get_members(chat_id):
     return merged
 
 # ================= LIMIT GC =================
-LIMIT_FILE = "limit_gc.json8"
+LIMIT_FILE = "limit_gc.json0"
 
 from datetime import datetime, timedelta, timezone
 
@@ -619,7 +619,7 @@ def tagall_worker():
                 "🚀 𝐓𝐀𝐆𝐀𝐋𝐋 𝐃𝐈𝐌𝐔𝐋𝐀𝐈\n\n"
                 f"🔗 partner : {partner_link}\n"
                 "⏰   durasi : 5 menit\n"
-                "📍 JIKA BOT EROR SILAHKAN KESINI @katrotagallBot"
+                "📍 JIKA BOT EROR SILAHKAN KESINI @tagalhyperBot"
             )
 
             bot.send_message(chat_id, start_msg)
@@ -662,7 +662,7 @@ def tagall_worker():
                     try:
                         msg = bot.send_message(
                             chat_id,
-                            f" 💕 𝗕𝗢𝗧 𝗧𝗔𝗚𝗔𝗟𝗟 𝐊𝐀𝐓𝐑𝐎 💖\n\n{text}\n\n{mention_text}",
+                            f" 💕 𝗕𝗢𝗧 𝗧𝗔𝗚𝗔𝗟𝗟 𝗛𝗬𝗣𝗘𝗥𝗜𝗢𝗡 💖\n\n{text}\n\n{mention_text}",
                             parse_mode="HTML",
                         )
 
@@ -892,12 +892,12 @@ def restore_cmd(update, context):
             # ================= BACKUP LAMA =================
             backup_name = f"backup_before_restore_{int(time.time())}.zip"
             with zipfile.ZipFile(backup_name, 'w') as backup:
-                if os.path.exists("partner.json8"):
-                    backup.write("partner.json8")
-                if os.path.exists("setting.json8"):
-                    backup.write("setting.json8")
-                if os.path.exists("database8"):
-                    for root, dirs, files2 in os.walk("database"):
+                if os.path.exists("partner.json0"):
+                    backup.write("partner.json0")
+                if os.path.exists("setting.json0"):
+                    backup.write("setting.json0")
+                if os.path.exists("database0"):
+                    for root, dirs, files2 in os.walk("database0"):
                         for f in files2:
                             backup.write(os.path.join(root, f))
 
@@ -908,7 +908,7 @@ def restore_cmd(update, context):
 
         # ================= AUTO RESTART =================
         import os
-        os.execv("/root/,autobot/venv/bin/python", ["python", "bot.py"])
+        os.execv("/root/,tagallbot/venv/bin/python", ["python", "bot.py0"])
 
     except Exception as e:
         update.message.reply_text(f"❌ restore gagal\n{e}")
@@ -921,7 +921,7 @@ def main():
     bot = updater.bot
 
     # 🔥 FIX UTAMA (INI YANG BENER)
-    database8.start_database_system(bot)
+    database0.start_database_system(bot)
 
     dp = updater.dispatcher
 
