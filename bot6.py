@@ -584,7 +584,7 @@ def tagall_worker():
         # ================= WORKER OFF =================
         if not WORKER_ACTIVE:
             try:
-                bot.send_message(user_id, "❌    Maaf lagi close tagall dulu")
+                bot.send_message(user_id, "❌ Maaf lagi close tagall dulu")
             except:
                 pass
             task_queue.task_done()
@@ -617,7 +617,7 @@ def tagall_worker():
             start_msg = (
                 "🚀 𝐓𝐀𝐆𝐀𝐋𝐋 𝐃𝐈𝐌𝐔𝐋𝐀𝐈\n\n"
                 f"🔗 partner : {partner_link}\n"
-                "⏰   durasi : 5 menit\n"
+                "⏰ durasi : 5 menit\n"
                 "📍 JIKA BOT EROR SILAHKAN KESINI @TAGallnigth_bot"
             )
 
@@ -670,12 +670,13 @@ def tagall_worker():
 
                         sent += len(batch)
                         update_progress(user_id, sent, total)
-                        
+
+                        # 🔥 SMOOTH COOLDOWN
                         if sent % 25 == 0:
-                        time.sleep(random.uniform(1.5, 2.5))
+                            time.sleep(random.uniform(1.5, 2.5))
 
                     except Exception as e:
-                        print("❌      ", e)
+                        print("❌", e)
 
                         if "Retry in" in str(e):
                             try:
@@ -683,8 +684,8 @@ def tagall_worker():
                                 time.sleep(wait + 1)
                             except:
                                 time.sleep(3)
-                        
-                        elif "Too Many Requests" in str(e): Lo
+
+                        elif "Too Many Requests" in str(e):
                             time.sleep(3)
 
                         elif "Timed out" in str(e):
@@ -693,18 +694,18 @@ def tagall_worker():
                         else:
                             time.sleep(1)
 
+                    # 🔥 DELAY UTAMA
                     time.sleep(BASE_DELAY + random.uniform(0.7, 1.3))
 
             # ================= SELESAI =================
             bot.send_message(
                 chat_id,
-                f"✅    𝐓𝐀𝐆𝐀𝐋𝐋 𝐒𝐄𝐋𝐄𝐒𝐀𝐈\n\n"
+                f"✅ 𝐓𝐀𝐆𝐀𝐋𝐋 𝐒𝐄𝐋𝐄𝐒𝐀𝐈\n\n"
                 f"🔗 partner : {partner_link}\n"
                 f"👥 Total: {sent}"
             )
 
             # SAVE LIMIT
-            partner_key = normalize_link(partner_link)
             limit_data[partner_key] = today
             save_limit(limit_data)
 
@@ -743,8 +744,9 @@ def tagall_worker():
             task_queue.task_done()
 
 
-# 🔥 JALANKAN AUTO RESET (WAJIB)
+# 🔥 JALANKAN AUTO RESET
 threading.Thread(target=reset_limit_daily, daemon=True).start()
+
 
 # ================= CEK JOIN =================
 def is_user_joined(user_id):
