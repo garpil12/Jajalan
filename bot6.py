@@ -350,7 +350,7 @@ def start_cmd(update: Update, context: CallbackContext):
 
     # ================= FINAL TEXT (FIX CLEAN) =================
     text = (
-        "𓊆 ✨ 𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎 𝗕𝗢𝗧 𝐊𝐀𝐓𝐑𝐎 ✨ 𓊇 \n\n"
+        "𓊆 ✨ 𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎 𝗕𝗢𝗧 𝐇𝐘𝐏𝐄𝐑𝐈𝐎𝐍 ✨ 𓊇 \n\n"
 
         "╭───────────────╮\n"
         "│ ٬٬ ࣪ ، 𒀭 bot tag all dengan sistem otomatis.\n"
@@ -814,7 +814,7 @@ def handle_private(update: Update, context: CallbackContext):
     # ================= LIMIT ANTRIAN =================
     antrian = task_queue.qsize()
 
-    if antrian >= 3:
+    if antrian >= 5:
         msg.reply_text(
             "⚠️ 𝐀𝐍𝐓𝐑𝐈𝐀𝐍 𝐏𝐄𝐍𝐔𝐇\n\n"
             "⏳ Tunggu beberapa menit\n"
