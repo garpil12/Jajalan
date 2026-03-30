@@ -640,7 +640,7 @@ def tagall_worker():
             random.shuffle(user_ids)
 
             BATCH_SIZE = 4
-            BASE_DELAY = 1.2
+            BASE_DELAY = 2.0
             start_time = time.time()
             duration = 300
 
